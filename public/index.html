@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html ng-app="votingApp">
+
+	<head>
+
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+		<script type="text/javascript" src="https://code.angularjs.org/1.5.6/angular-resource.min.js"></script>
+
+		<title>voting.app - fullstack voting application by rebot</title>
+		
+		<link href="/public/css/main.css" rel="stylesheet" type="text/css">
+	</head>
+
+	<header class="hero-unit" id="banner">
+		<p>Welcome, <span id="display-name"></span>!</p>
+		<a class="menu" href="/profile">Profile</a>
+		<p>|</p>
+		<a class="menu" href="/logout">Logout</a>
+
+
+	  <div class="container">
+	    <h1>voting.app</h1>
+	    <p class="lead">fullstack voting application by rebot</p>
+	    <img src="/public/img/logo.png" alt="logo">
+	  </div>
+	</header>
+
+	<body>
+		<div class="container" ng-controller="clickController" ng-cloak>
+
+		<p>You have clicked the button {{clicks}} times.</p>
+			<br />
+			<div class="btn-container">
+			  <button type="submit" class="btn btn-add" ng-click="addClick()">CLICK ME!</button>
+			  <button class="btn btn-delete" ng-click="resetClicks()">RESET</button>
+			</div>
+		</div>
+		
+
+<!--
+		<div class="container">
+		  <div class="row">
+		    <div class="col-lg-12">
+		      <h1 class="page-header">top polls</h1>
+		      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-2" ng-repeat="thing in $ctrl.awesomeThings">
+		        <li><a href="#" uib-tooltip="created by: {{thing.createdby | lowercase}}"><h4>{{thing.name}}</h4></a></li>
+		        <li ng-repeat="x in thing.options"><h5>{{x.optionid}}</h5>
+		          <div class="progress" style="width:50%">
+		            <div class="progress-bar" style="width:20%"></div>
+		          </div>
+		        </li>
+		      </ul>
+		    </div>
+		  </div>
+		</div>
+-->
+
+		<script type="text/javascript" src="common/ajax-functions.js"></script>
+		<script type="text/javascript" src="controllers/clickController.client.js"></script>
+		<script type="text/javascript" src="controllers/userController.client.js"></script>
+
+	</body>
+</html>
