@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 
-<html>
+<html ng-app="votingApp">
 
 	<head>
+
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+		<script type="text/javascript" src="https://code.angularjs.org/1.5.6/angular-resource.min.js"></script>
+		<script type="text/javascript" src="controllers/mainController.client.js"></script>
+
 		<title>voting.app - fullstack voting application by rebot</title>
 		
 		<link href="/public/css/main.css" rel="stylesheet" type="text/css">
@@ -10,20 +15,17 @@
 
 	<body>
 		<div class="container">
-			<div class="github-profile">
+			<div class="github-profile" ng-controller="userController" ng-cloak>
 				<img src="/public/img/gh-mark-32px.png" alt="github logo" />
-				<p><span>ID: </span><span id="profile-id" class="profile-value"></span></p>
-				<p><span>Username: </span><span id="profile-username" class="profile-value"></span></p>
-				<p><span>Display Name: </span><span id="display-name" class="profile-value"></span></p>
-				<p><span>Repositories: </span><span id="profile-repos" class="profile-value"></span></p>
+				<p><span>ID: {{id}}</p>
+				<p><span>Username: {{username}}</p>
+				<p><span>Display Name: {{name}}</p>
+				<p><span>Repositories: {{repos}}</p>
 				<a class="menu" href="/">Home</a>
 				<p id="menu-divide">|</p>
 				<a class="menu" href="/logout">Logout</a>
 			</div>
 		</div>
-		
-		<script type="text/javascript" src="common/ajax-functions.js"></script>
-		<script type="text/javascript" src="controllers/userController.client.js"></script>
 	</body>
 
 </html>

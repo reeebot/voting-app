@@ -8,7 +8,7 @@
          
          $scope.getClicks = function () {
             Click.get(function (results) {
-               $scope.clicks = results.nbrClicks;
+               $scope.clicks = results.github.nbrClicks;
             });
          };
          
@@ -24,6 +24,20 @@
                $scope.getClicks();
             });
          };
+      }])
+      .controller('userController', ['$scope', '$resource', function ($scope, $resource) {         
+         var User = $resource('/api/id');
+         
+         $scope.loadUser = function () {
+            User.get(function (results) {
+               $scope.id = results.id;
+               $scope.username = results.username;
+               $scope.repos = results.publicRepos;
+               $scope.name = results.displayName;
+            });
+         };
+         
+         $scope.loadUser();
       }]);
 
 })();

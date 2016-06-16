@@ -6,6 +6,7 @@
 
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 		<script type="text/javascript" src="https://code.angularjs.org/1.5.6/angular-resource.min.js"></script>
+		<script type="text/javascript" src="controllers/mainController.client.js"></script>
 
 		<title>voting.app - fullstack voting application by rebot</title>
 		
@@ -13,10 +14,12 @@
 	</head>
 
 	<header class="hero-unit" id="banner">
-		<p>Welcome, <span id="display-name"></span>!</p>
-		<a class="menu" href="/profile">Profile</a>
-		<p>|</p>
-		<a class="menu" href="/logout">Logout</a>
+		<div ng-controller="userController" ng-cloak>
+			<p>Welcome, {{username}}!</p>
+			<a class="menu" href="/profile">Profile</a>
+			<p>|</p>
+			<a class="menu" href="/logout">Logout</a>
+		</div>
 
 
 	  <div class="container">
@@ -56,9 +59,8 @@
 		</div>
 -->
 
-		<script type="text/javascript" src="common/ajax-functions.js"></script>
-		<script type="text/javascript" src="controllers/clickController.client.js"></script>
-		<script type="text/javascript" src="controllers/userController.client.js"></script>
+		
+
 
 	</body>
 </html>

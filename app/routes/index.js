@@ -35,12 +35,7 @@ module.exports = function (app, passport) {
 		.get(isLoggedIn, function (req, res) {
 			res.sendFile(path + '/public/profile.html');
 		});
-
-	app.route('/api/:id')
-		.get(isLoggedIn, function (req, res) {
-			res.json(req.user.github);
-		});
-
+	
 	app.route('/auth/github')
 		.get(passport.authenticate('github'));
 
@@ -50,11 +45,17 @@ module.exports = function (app, passport) {
 			failureRedirect: '/login'
 		}));
 
+	app.route('/api/all')
+		.get(isLoggedIn, clickHandler.getAll)
+
+	app.route('/api/id')
+		.get(isLoggedIn, function (req, res) {
+			res.json(req.user.github);
+		});
+
 	app.route('/api/clicks')
 		.get(isLoggedIn, clickHandler.getClicks)
 		.post(isLoggedIn, clickHandler.addClick)
 		.delete(isLoggedIn, clickHandler.resetClicks);
 
-	app.route('/api/all')
-		.get(clickHandler.getAll)
 };
