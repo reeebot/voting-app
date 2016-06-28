@@ -25,7 +25,7 @@
             });
          };
       }])
-      .controller('userController', ['$scope', '$resource', function ($scope, $resource) {         
+      .controller('userController', ['$scope', '$resource', function ($scope, $resource) {
          var User = $resource('/api/id');
          
          $scope.loadUser = function () {
@@ -38,40 +38,16 @@
          };
          
          $scope.loadUser();
+      }])
+      .controller('panelController', ['$scope', function ($scope) {
+         $scope.tab = 1;
+
+         this.selectTab = function(setTab) {
+            $scope.tab = setTab;
+         }
+         this.isSelected = function(checkTab){
+            return $scope.tab === checkTab;
+         };
       }]);
 
 })();
-
-/*
-'use strict';
-
-(function () {
-
-   var addButton = document.querySelector('.btn-add');
-   var deleteButton = document.querySelector('.btn-delete');
-   var clickNbr = document.querySelector('#click-nbr');
-   var apiUrl = appUrl + '/api/:id/clicks';
-
-   function updateClickCount (data) {
-      var clicksObject = JSON.parse(data);
-      clickNbr.innerHTML = clicksObject.clicks;
-   }
-
-   ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, updateClickCount));
-
-   addButton.addEventListener('click', function () {
-
-      ajaxFunctions.ajaxRequest('POST', apiUrl, function () {
-         ajaxFunctions.ajaxRequest('GET', apiUrl, updateClickCount);
-      });
-
-   }, false);
-
-   deleteButton.addEventListener('click', function () {
-
-      ajaxFunctions.ajaxRequest('DELETE', apiUrl, function () {
-         ajaxFunctions.ajaxRequest('GET', apiUrl, updateClickCount);
-      });
-
-   }, false);
-*/

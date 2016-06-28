@@ -24,6 +24,7 @@
   "author": "Tim Meijome",
   "license": "MIT",
   "dependencies": {
+    "bootstrap": "^3.3.6",
     "dotenv": "^1.2.0",
     "express": "^4.12.4",
     "express-session": "^1.11.3",
