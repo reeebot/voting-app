@@ -24,6 +24,30 @@ function ClickHandler () {
 			);
 	};
 
+	this.getPolls = function (req, res) {
+		Users
+			.findOne({ 'github.id': req.user.github.id })
+			.exec(function (err, result) {
+				if (err) { throw err; }
+				res.json(result);
+			});
+	};
+
+
+	this.newPoll = function (req, res) {
+		Users
+			.findOneAndUpdate({ 'github.id': req.user.github.id },
+				{ $push: {github.polls: [
+					'test'
+					]}})
+			.exec(function (err, result) {
+					if (err) { throw err; }
+
+					res.json();
+				}
+			);
+	};
+
 	this.resetClicks = function (req, res) {
 		Users
 			.findOneAndUpdate({ 'github.id': req.user.github.id }, { 'github.nbrClicks': 0 })

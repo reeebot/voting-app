@@ -9,7 +9,8 @@ var User = new Schema({
 		displayName: String,
 		username: String,
     	publicRepos: Number,
-    	nbrClicks: Number
+    	nbrClicks: Number,
+    	polls: Array
 	}
 });
 

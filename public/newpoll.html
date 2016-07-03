@@ -1,74 +1,84 @@
 <!DOCTYPE html>
 
-<html ng-app="votingApp">
+<html lang="en" ng-app="votingApp">
 
-	<head>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="voting.app fullstack voting application by rebot">
+    <meta name="author" content="Tim Meijome">
+    <link rel="icon" href="../../favicon.ico">
 
-		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-		<script type="text/javascript" src="https://code.angularjs.org/1.5.6/angular-resource.min.js"></script>
-		<script type="text/javascript" src="controllers/mainController.client.js"></script>
+    <title>voting.app - fullstack voting application by rebot</title>
 
-		<title>voting.app - fullstack voting application by rebot</title>
-		
-		<link href="/public/css/main.css" rel="stylesheet" type="text/css">
-	</head>
+    <!-- Bootstrap core CSS -->
+    <link href="/public/css/bootstrap.css" rel="stylesheet">
 
-	<header class="hero-unit" id="banner">
-		<div class="nav-unit" ng-controller="userController" ng-cloak>
-			<a class="menu" href="/">voting.app</a>
-			<p>|</p>
-			<a class="menu" href="/mypolls">my polls</a>
-			<p>|</p>
-			<a><a class="menu" href="/profile">{{username}}</a></a>
-			<p>|</p>
-			<a class="menu" href="/logout">logout</a>
-		</div>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="/public/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
+    <!-- Custom styles for this template -->
+    <link href="/public/css/jumbotron-narrow.css" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/main.css">
 
-	  <div class="container">
-	    <h2>new poll</h2>
-	    <img src="/public/img/logo.png" alt="logo">
-	  </div>
-	</header>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
-	<body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="/public/js/bootstrap.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script type="text/javascript" src="https://code.angularjs.org/1.5.6/angular-resource.min.js"></script>
 
-<!--
-		<div class="btn-container">
-			<br>
-			<button type="button" class="btn btn-default">new poll</button>
-		</div>
--->
+    
+  </head>
 
+  <body ng-controller="pollController" ng-cloak>
+    <script src="controllers/mainController.client.js"></script>
 
-<!--
-		<div class="container" ng-controller="clickController" ng-cloak>
+    <header>
+      <div class="jumbotron" ng-controller="userController">
+        <h1>{{ username | lowercase}}</h1>
+      </div>
+    </header>
 
-			<p>You have clicked the button {{clicks}} times.</p>
-				<br />
-				<div class="btn-container">
-				  <button type="submit" class="btn btn-add" ng-click="addClick()">CLICK ME!</button>
-				  <button class="btn btn-delete" ng-click="resetClicks()">RESET</button>
-				</div>
-		</div>
--->		
+    <div class="container">
+      <div class="page-header">
+        <h1>create a new poll</h1>
+      </div>
+      <form>
+        <p class="input-group">
+          <input type="text" class="form-control" placeholder="question" ng-model="$scope.newPoll">
+          <input type="text" class="form-control" placeholder="option 1" ng-model="$scope.option1">
+          <input type="text" class="form-control" placeholder="option 2" ng-model="$scope.option2">
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-primary" ng-click="newPoll()">add</button>
+          </span>
+        </p>
+      </form>
 
-
-		<div class="container" >
-		      <h1>top polls</h1>
-		      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-2" ng-repeat="thing in $ctrl.awesomeThings">
-		        <li><a href="#" uib-tooltip="created by: {{thing.createdby | lowercase}}"><h4>{{thing.name}}</h4></a></li>
-		        <li ng-repeat="x in thing.options"><h5>{{x.optionid}}</h5>
-		          <div class="progress" style="width:50%">
-		            <div class="progress-bar" style="width:20%"></div>
-		          </div>
-		        </li>
-		      </ul>
-		</div>
-
-
-		
+      <div>
+      	<h3><u><center>{{$scope.newPoll}}</center></u></h3>
+      	<h5>{{$scope.option1}}<br>
+      	{{$scope.option2}}</h5>
+      </div>
 
 
-	</body>
+      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-2" ng-repeat="poll in this.Polls">
+        <li><a href="#" uib-tooltip="created by: {{poll.createdby | lowercase}}"><h4>{{poll.name}}</h4></a></li>
+        <li ng-repeat="x in poll.options"><h5>{{x.optionid}}</h5>
+          <div class="progress" style="width:50%">
+            <div class="progress-bar" style="width:20%"></div>
+          </div>
+        </li>
+      </ul>
+
+      
+    </div>
+
+  </body>
 </html>

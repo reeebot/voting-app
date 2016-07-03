@@ -25,6 +25,16 @@
             });
          };
       }])
+      .controller('pollController', ['$scope', '$resource', function ($scope, $resource) {         
+         var Poll = $resource('/api/polls');
+         this.Polls = $resource('/api/polls');
+         
+         $scope.newPoll = function() {
+            Poll.save(function () {
+            });
+         };
+
+      }])
       .controller('userController', ['$scope', '$resource', function ($scope, $resource) {
          var User = $resource('/api/id');
          

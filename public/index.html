@@ -34,23 +34,14 @@
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 		<script type="text/javascript" src="https://code.angularjs.org/1.5.6/angular-resource.min.js"></script>
 
-		<script type="text/javascript" src="controllers/mainController.client.js"></script>
+		
 	</head>
 
 	<body>
+		<script src="controllers/mainController.client.js"></script>
     <section class="container" ng-controller="panelController as panel">
-      <div class="header clearfix">
-        <nav ng-controller="userController" ng-cloak>
-          <ul class="nav nav-pills pull-left">
-						<li role="presentation" ng-class="{active:panel.isSelected(1)}"><a href ng-click="panel.selectTab(1)">voting.app</a></li>
-          </ul>
-          <ul class="nav nav-pills pull-right">
-            <li role="presentation" ng-class="{active:panel.isSelected(2)}"><a href ng-click="panel.selectTab(2)">my polls</a></li>
-            <li role="presentation" ng-class="{active:panel.isSelected(3)}"><a href ng-click="panel.selectTab(3)">{{username}}</a></li>
-            <li role="presentation"><a href="/logout">logout</a></li>
-          </ul>
-        </nav>
-      </div>
+
+    	<div ng-include="'/public/menu.html'"></div>
 
       <div class="jumbotron">
         <h1>voting.app</h1>
@@ -58,48 +49,11 @@
         <img src="/public/img/logo.png" alt="logo">
       </div>
 
-      <div class="row marketing" ng-show="tab === 1">
-        <div class="col-lg-6">
-          <h4>Subheading</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+      <div ng-include="'/public/main.html'"></div>
 
-          <h4>Subheading</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+      <div ng-include="'/public/mypolls.html'"></div>
 
-          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-        </div>
-
-        <div class="col-lg-6">
-          <h4>Subheading</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-          <h4>Subheading</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-        </div>
-      </div>
-
-			<div class="container" ng-show="tab === 2">
-	      <h1>my polls</h1>
-
-				<div class="btn-container">
-					<br>
-					<button type="button" class="btn btn-default">new poll</button>
-				</div>
-			</div>
-
-			<div class="container" ng-show="tab === 3">
-				<div class="github-profile" ng-controller="userController" ng-cloak>
-					<img src="/public/img/gh-mark-32px.png" alt="github logo" />
-					<p><span>ID: {{id}}</p>
-					<p><span>Username: {{username}}</p>
-					<p><span>Display Name: {{name}}</p>
-					<p><span>Repositories: {{repos}}</p>
-				</div>
-			</div>
+      <div ng-include="'/public/profile.html'"></div>
 
       <footer class="footer">
         <p>&copy; 2015 rebot</p>
@@ -110,20 +64,6 @@
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="/public/js/ie10-viewport-bug-workaround.js"></script>
-
-<!--
-		<div class="panel" ng-show="tab === 1">
-      <h1>top polls</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-2" ng-repeat="thing in $ctrl.awesomeThings">
-        <li><a href="#" uib-tooltip="created by: {{thing.createdby | lowercase}}"><h4>{{thing.name}}</h4></a></li>
-        <li ng-repeat="x in thing.options"><h5>{{x.optionid}}</h5>
-          <div class="progress" style="width:50%">
-            <div class="progress-bar" style="width:20%"></div>
-          </div>
-        </li>
-      </ul>
-		</div>
--->
 
 	</body>
 </html>
