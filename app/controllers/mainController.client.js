@@ -2,7 +2,7 @@
 
 (function () {
    angular
-      .module('votingApp', ['ngResource'])
+      .module('votingApp', ['ngResource', 'ui.bootstrap'])
       .controller('clickController', ['$scope', '$resource', function ($scope, $resource) {         
          var Click = $resource('/api/clicks');
          
@@ -27,16 +27,22 @@
       }])
       .controller('pollController', ['$scope', '$resource', function ($scope, $resource) {         
          var Poll = $resource('/api/polls');
-         this.Polls = $resource('/api/polls');
+         $scope.polls = Poll.query();
          
-         $scope.newPoll = function() {
-            Poll.save(function () {
-            });
+         $scope.newPoll = function(form) {
+            Poll.save(form);
+            $scope.form = [];
+            $scope.polls = Poll.query();
+         };
+         $scope.addVote = function(pollid, optionid) {
+            var Vote = $resource('/api/polls/vote/'+pollid+'/'+optionid);
+            Vote.save();
+            $scope.polls = Poll.query();
          };
 
       }])
       .controller('userController', ['$scope', '$resource', function ($scope, $resource) {
-         var User = $resource('/api/id');
+         var User = $resource('/api/user');
          
          $scope.loadUser = function () {
             User.get(function (results) {

@@ -33,6 +33,8 @@
     <script src="/public/js/bootstrap.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     <script type="text/javascript" src="https://code.angularjs.org/1.5.6/angular-resource.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.3.3.js"></script>
 
     
   </head>
@@ -52,24 +54,23 @@
       </div>
       <form>
         <p class="input-group">
-          <input type="text" class="form-control" placeholder="question" ng-model="$scope.newPoll">
-          <input type="text" class="form-control" placeholder="option 1" ng-model="$scope.option1">
-          <input type="text" class="form-control" placeholder="option 2" ng-model="$scope.option2">
+          <input type="text" class="form-control" placeholder="question" ng-model="form.pollq">
+          <input type="text" class="form-control" placeholder="option 1" ng-model="form.option1">
+          <input type="text" class="form-control" placeholder="option 2" ng-model="form.option2">
           <span class="input-group-btn">
-            <button type="submit" class="btn btn-primary" ng-click="newPoll()">add</button>
+            <button type="submit" class="btn btn-primary" ng-click="newPoll(form)">add</button>
           </span>
         </p>
       </form>
 
       <div>
-      	<h3><u><center>{{$scope.newPoll}}</center></u></h3>
-      	<h5>{{$scope.option1}}<br>
-      	{{$scope.option2}}</h5>
+      	<h3><u><center>{{form.pollq}}</center></u></h3>
+      	<h5>{{form.option1}}<br>
+      	{{form.option2}}</h5>
       </div>
 
-
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-2" ng-repeat="poll in this.Polls">
-        <li><a href="#" uib-tooltip="created by: {{poll.createdby | lowercase}}"><h4>{{poll.name}}</h4></a></li>
+      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-2" ng-repeat="poll in polls.github.polls">
+        <li><a href="#" uib-tooltip="created by: {{poll.by | lowercase}}"><h4>{{poll.name}}</h4></a></li>
         <li ng-repeat="x in poll.options"><h5>{{x.optionid}}</h5>
           <div class="progress" style="width:50%">
             <div class="progress-bar" style="width:20%"></div>

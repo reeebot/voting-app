@@ -48,19 +48,22 @@ module.exports = function (app, passport) {
 	app.route('/api/all')
 		.get(isLoggedIn, clickHandler.getAll);
 
-	app.route('/api/id')
+	app.route('/api/user')
 		.get(isLoggedIn, function (req, res) {
 			res.json(req.user.github);
 		});
 
-	app.route('/api/clicks')
-		.get(isLoggedIn, clickHandler.getClicks)
-		.post(isLoggedIn, clickHandler.addClick)
-		.delete(isLoggedIn, clickHandler.resetClicks);
-
 	app.route('/api/polls')
-		.get(isLoggedIn, clickHandler.getPolls)
-		.post(isLoggedIn, clickHandler.newPoll);
+		.get(isLoggedIn, clickHandler.getAllPolls)		//show all polls
+		.post(isLoggedIn, clickHandler.newPoll);		//create new poll
+
+	app.route('/api/polls/:id')
+		.get(isLoggedIn, clickHandler.getClicks)		//show single poll
+		.post(clickHandler.addVote)						//update poll
+		.delete(isLoggedIn, clickHandler.resetClicks);	//delete poll
+
+	app.route('/api/polls/vote/:id/:option')
+		.post(clickHandler.addVote)						//upvote poll
 
 	app.route('/newpoll')
 		.get(isLoggedIn, function (req, res) {
