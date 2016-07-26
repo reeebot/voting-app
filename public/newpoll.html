@@ -1,85 +1,28 @@
-<!DOCTYPE html>
+<div ng-include="'/public/menu.html'"></div>
 
-<html lang="en" ng-app="votingApp">
+<div class="jumbotron">
+  <h1><i class="fa fa-plus fa-lg" aria-hidden="true"></i></h1>
+  <p class="lead">create new poll</p>
+  <img src="/public/img/logo.png" alt="logo">
+</div>
 
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="voting.app fullstack voting application by rebot">
-    <meta name="author" content="Tim Meijome">
-    <link rel="icon" href="../../favicon.ico">
-
-    <title>voting.app - fullstack voting application by rebot</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="/public/css/bootstrap.css" rel="stylesheet">
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="/public/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="/public/css/jumbotron-narrow.css" rel="stylesheet">
-    <link rel="stylesheet" href="/public/css/main.css">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-    <script src="/public/js/bootstrap.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-    <script type="text/javascript" src="https://code.angularjs.org/1.5.6/angular-resource.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.js"></script>
-    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.3.3.js"></script>
-
-    
-  </head>
-
-  <body ng-controller="pollController" ng-cloak>
-    <script src="controllers/mainController.client.js"></script>
-
-    <header>
-      <div class="jumbotron" ng-controller="userController">
-        <h1>{{ username | lowercase}}</h1>
-      </div>
-    </header>
-
-    <div class="container">
-      <div class="page-header">
-        <h1>create a new poll</h1>
-      </div>
-      <form>
-        <p class="input-group">
-          <input type="text" class="form-control" placeholder="question" ng-model="form.pollq">
-          <input type="text" class="form-control" placeholder="option 1" ng-model="form.option1">
-          <input type="text" class="form-control" placeholder="option 2" ng-model="form.option2">
-          <span class="input-group-btn">
-            <button type="submit" class="btn btn-primary" ng-click="newPoll(form)">add</button>
-          </span>
-        </p>
-      </form>
-
-      <div>
-      	<h3><u><center>{{form.pollq}}</center></u></h3>
-      	<h5>{{form.option1}}<br>
-      	{{form.option2}}</h5>
-      </div>
-
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-2" ng-repeat="poll in polls.github.polls">
-        <li><a href="#" uib-tooltip="created by: {{poll.by | lowercase}}"><h4>{{poll.name}}</h4></a></li>
-        <li ng-repeat="x in poll.options"><h5>{{x.optionid}}</h5>
-          <div class="progress" style="width:50%">
-            <div class="progress-bar" style="width:20%"></div>
-          </div>
-        </li>
-      </ul>
-
-      
+<div ng-cloak>
+  <form name="newpoll" ng-submit="newpoll.$valid && newPoll()" novalidate>
+    <p class="input-group">
+      <span class="input-group-btn">
+        <input type="text" class="form-control" placeholder="question" ng-model="form.pollq" required />
+      </span>
+    </p>
+    <div ng-repeat="option in options">
+      <p class="input-group">
+        <span class="input-group-btn">
+          <input type="text" class="form-control" placeholder="option" ng-model="option.name" required />
+          <button type="submit" class="btn btn-primary" ng-show="$last" ng-click="addChoice()"><i class="fa fa-plus"></i></button>
+        </span>
+      </p>
     </div>
-
-  </body>
-</html>
+    <p align="right">
+    <button type="submit" class="btn btn-primary">create</button>
+    </p>
+  </form>
+</div>

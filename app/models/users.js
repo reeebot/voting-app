@@ -6,7 +6,9 @@ var Schema = mongoose.Schema;
 var User = new Schema({
 	github: {
 		id: String,
-		username: String
+		username: String,
+		userpic: String,
+		email: String
 	}
 });
 

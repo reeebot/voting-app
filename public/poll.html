@@ -1,0 +1,17 @@
+<div ng-include="'/public/menu.html'"></div>
+
+<div class="jumbotron"ng-cloak>
+	<h1>{{singlePoll.name}}</h1>
+  <p class="lead">by: {{singlePoll.by}}</p>
+</div>
+
+<div class="row marketing">
+  <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-2" ng-cloak>
+    <li ng-repeat="x in singlePoll.options"><h5>{{x.name}}</h5>
+      <div class="progress" style="width:80%">
+        <div class="progress-bar" style="width:20%">{{x.votes}}</div>
+        <button ng-controller="pollController" type="submit" class="btn-xs btn-primary" ng-click="addVote(singlePoll._id, x.id)">+</button>
+      </div>
+    </li>
+  </ul>
+</div>

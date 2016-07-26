@@ -1,34 +1,13 @@
-<div class="row marketing" ng-show="tab === 1" ng-controller="pollController" ng-cloak>
-  <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-2" ng-repeat="poll in polls">
-    <li><a href="#" uib-tooltip="created by: {{poll.by | lowercase}}"><h4>{{poll.name}}</h4></a></li>
-    <li ng-repeat="x in poll.options"><h5>{{x.option}}</h5>
-    <button type="submit" class="btn btn-primary" ng-click="addVote(poll._id, x._id)">add</button>
-      <div class="progress" style="width:50%">
-        <div class="progress-bar" style="width:20%">{{x.votes}}</div>
-      </div>
-    </li>
+<div ng-include="'/public/menu.html'"></div>
+
+<div class="jumbotron">
+  <h1>voting.app</h1>
+  <p class="lead">MEAN stack voting application by rebot</p>
+  <img src="/public/img/logo.png" alt="logo">
+</div>
+<div>
+  <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-6 col-sm-2" ng-repeat="poll in polls" ng-cloak>
+    <li><a href ng-href="/poll/{{poll._id}}" uib-tooltip="created by: {{poll.by | lowercase}}"><h4>{{poll.name}}</h4></a></li>
+
   </ul>
-
-  <!--<div class="col-lg-6">
-    <h4>Subheading</h4>
-    <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-    <h4>Subheading</h4>
-    <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-    <h4>Subheading</h4>
-    <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-  </div>
-
-  <div class="col-lg-6">
-    <h4>Subheading</h4>
-    <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-    <h4>Subheading</h4>
-    <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-    <h4>Subheading</h4>
-    <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-  </div>-->
-
 </div>

@@ -34,6 +34,8 @@ module.exports = function (passport) {
 
 					newUser.github.id = profile.id;
 					newUser.github.username = profile.username;
+					newUser.github.userpic = profile._json.avatar_url;
+					newUser.github.email = profile._json.email;
 
 					newUser.save(function (err) {
 						if (err) {

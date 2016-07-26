@@ -1,9 +1,22 @@
-<div class="container" ng-show="tab === 3">
-	<div class="github-profile" ng-controller="userController" ng-cloak>
-		<img src="/public/img/gh-mark-32px.png" alt="github logo" />
-		<p><span>ID: {{id}}</p>
-		<p><span>Username: {{username}}</p>
-		<p><span>Display Name: {{name}}</p>
-		<p><span>Repositories: {{repos}}</p>
-	</div>
+<div ng-include="'/public/menu.html'"></div>
+
+<div class="jumbotron"ng-cloak>
+  <h1>{{ username | lowercase}}</h1>
+  <p class="lead">{{email}}</p>
+  <div>
+  	<img ng-src={{userpic}} height=64px width=64px alt="logo" class="img-circle"/>
+  </div>
+</div>
+
+<div class="container" ng-controller="pollController">
+  <ul class="nav nav-tabs nav-stacked col-md-12 col-lg-12 col-sm-12" ng-repeat="poll in userPolls">
+    <li>
+    	<a href="#" uib-tooltip="created by: {{poll.by | lowercase}}"><h4><button type="submit" class="btn-xs btn-danger" ng-click="delPol(poll._id)"><i class="fa fa-minus fa-lg" aria-hidden="true"></i></button> {{poll.name}}</h4></a>
+    </li>
+    <li ng-repeat="x in poll.options"><h5>{{x.name}}</h5>
+      <div class="progress" style="width:50%">
+        <div class="progress-bar" style="width:20%">{{x.votes}}</div>
+      </div>
+    </li>
+  </ul>
 </div>

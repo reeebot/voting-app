@@ -31,11 +31,11 @@ module.exports = function (app, passport) {
 			res.redirect('/login');
 		});
 
-	/* app.route('/profile')
-		.get(isLoggedIn, function (req, res) {
-			res.sendFile(path + '/public/profile.html');
-		}); */
-	
+	//app.route('/poll/:id')
+	//	.get(function (req, res) {
+	//		res.sendFile(path + '/public/poll.html');
+	//	});
+
 	app.route('/auth/github')
 		.get(passport.authenticate('github'));
 
@@ -45,29 +45,35 @@ module.exports = function (app, passport) {
 			failureRedirect: '/login'
 		}));
 
-	app.route('/api/all')
-		.get(isLoggedIn, clickHandler.getAll);
-
 	app.route('/api/user')
 		.get(isLoggedIn, function (req, res) {
 			res.json(req.user.github);
 		});
 
 	app.route('/api/polls')
-		.get(isLoggedIn, clickHandler.getAllPolls)		//show all polls
+		.get(isLoggedIn, clickHandler.getAllPolls)		//get all polls
 		.post(isLoggedIn, clickHandler.newPoll);		//create new poll
 
+	app.route('/api/userpolls')
+		.get(isLoggedIn, clickHandler.getUserPolls)		//get current user's polls
+
 	app.route('/api/polls/:id')
-		.get(isLoggedIn, clickHandler.getClicks)		//show single poll
+		.get(isLoggedIn, clickHandler.getPoll) 			//get single poll
 		.post(clickHandler.addVote)						//update poll
-		.delete(isLoggedIn, clickHandler.resetClicks);	//delete poll
+		.delete(isLoggedIn, clickHandler.deletePoll);	//delete poll
 
 	app.route('/api/polls/vote/:id/:option')
 		.post(clickHandler.addVote)						//upvote poll
 
-	app.route('/newpoll')
+	app.route('/*')
 		.get(isLoggedIn, function (req, res) {
-			res.sendFile(path + '/public/newpoll.html');
+			res.sendFile(path + '/public/index.html');
 		});
+
+	/* app.route('/profile')
+		.get(isLoggedIn, function (req, res) {
+			res.sendFile(path + '/public/profile.html');
+		}); */
+
 
 };

@@ -1,12 +1,12 @@
-<div class="header clearfix">
+<div class="header clearfix" ng-controller="panelController">
   <nav ng-controller="userController" ng-cloak>
     <ul class="nav nav-pills pull-left">
-			<li role="presentation" ng-class="{active:panel.isSelected(1)}"><a href ng-click="panel.selectTab(1)">voting.app</a></li>
+			<li role="presentation" ng-class="{active:isSelected('/')}"><a href="/">voting.app</a></li>
     </ul>
     <ul class="nav nav-pills pull-right">
-      <li role="presentation" ng-class="{active:panel.isSelected(2)}"><a href ng-click="panel.selectTab(2)">my polls</a></li>
-      <li role="presentation" ng-class="{active:panel.isSelected(3)}"><a href ng-click="panel.selectTab(3)">{{username}}</a></li>
-      <li role="presentation"><a href="/logout">logout</a></li>
+      <li role="presentation" ng-class="{active:isSelected('/newpoll')}"><a href="newpoll"><i class="fa fa-plus-circle fa-fw fa-lg"></i></a></li>    
+      <li role="presentation" ng-class="{active:isSelected('/profile')}"><a href="profile">{{username}}</a></li>
+      <li role="presentation"><a ng-href="/{{'logout'}}" target="_self">logout</a></li>
     </ul>
   </nav>
 </div>

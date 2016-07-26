@@ -4,3 +4,13 @@
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
+
+.ng-invalid {
+	border-color: #ff6600;
+}
+.ng-valid {
+	border-color: #00cc66;
+}
+.ng-pristine {
+	border-color: #99ccff;
+}
