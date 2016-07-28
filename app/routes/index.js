@@ -59,11 +59,11 @@ module.exports = function (app, passport) {
 
 	app.route('/api/polls/:id')
 		.get(isLoggedIn, clickHandler.getPoll) 			//get single poll
-		.post(clickHandler.addVote)						//update poll
+		.post(isLoggedIn, clickHandler.editPoll)		//update poll
 		.delete(isLoggedIn, clickHandler.deletePoll);	//delete poll
 
 	app.route('/api/polls/vote/:id/:option')
-		.post(clickHandler.addVote)						//upvote poll
+		.post(isLoggedIn, clickHandler.addVote)			//upvote poll
 
 	app.route('/*')
 		.get(isLoggedIn, function (req, res) {

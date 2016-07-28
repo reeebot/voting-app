@@ -24,6 +24,11 @@
             when('/poll/:id', {
                 templateUrl : '/public/poll.html',
                 controller  : 'findPollController'
+            }).
+
+            when('/poll/:id/edit', {
+                templateUrl : '/public/editpoll.html',
+                controller  : 'findPollController'
             })
 
          // enable html5Mode for pushstate ('#'-less URLs)
@@ -36,7 +41,7 @@
             return $location.url() === checkTab;
          };
       }])
-      .controller('pollController', ['$scope', '$resource', '$location', function ($scope, $resource, $location) {
+      .controller('pollController', ['$scope', '$resource', '$location', '$window', function ($scope, $resource, $location, $window) {
          var Poll = $resource('/api/polls');
          $scope.polls = Poll.query();
          $scope.options = [{id: 0, 'votes': 0}, {id: 1, 'votes': 0}];
@@ -53,22 +58,29 @@
             $scope.form = {};
             $scope.options = [{id: 0, 'votes': 0}, {id: 1, 'votes': 0}];
             $location.path('/');
-            //Poll.query(function (results){
-            //   $scope.polls = results;
-            //});
             $scope.polls = Poll.query();
 
          };
-         $scope.delPol = function(pollid) {
+
+         $scope.delPoll = function(pollid) {
             var onePoll = $resource('/api/polls/'+pollid);
-            onePoll.delete(function(){
-               $scope.userPolls = uPolls.query();
+            if ($window.confirm('are you sure you want to delete the poll?')){
+               onePoll.delete(function(){
+                  $location.path('/profile');
+                  $scope.userPolls = uPolls.query();
             });
+            }
          };
 
          $scope.addChoice = function() {
             var newItemNo = $scope.options.length;
             $scope.options.push({'id': newItemNo, 'votes': 0});
+         };
+
+         $scope.delChoice = function(index) {
+            if ($scope.options.length > 2) {
+               $scope.options.splice(index, 1);
+            }
          };
 
       }])
@@ -87,13 +99,38 @@
          $scope.loadUser();
 
       }])
-      .controller('findPollController', ['$scope', '$resource', '$routeParams', function ($scope, $resource, $routeParams) {
-         $scope.onePoll = function(pollid) {
+      .controller('findPollController', ['$scope', '$resource', '$routeParams', '$location', function ($scope, $resource, $routeParams, $location) {
+         $scope.findOnePoll = function(pollid) {
             var findPoll = $resource('/api/polls/'+pollid);
             $scope.singlePoll = findPoll.get();
          };
          var pId = $routeParams.id;
-         $scope.onePoll(pId)
+         $scope.findOnePoll(pId)
+
+
+         $scope.editPoll = function(pollid) {
+            var updatePoll = $resource('/api/polls/'+pollid);
+            var send = {
+               'question': $scope.singlePoll.name,
+               'options': $scope.singlePoll.options
+            }
+            updatePoll.save(send, function() {
+               $location.path('/profile');
+               var uPolls = $resource('/api/userpolls');
+               $scope.userPolls = uPolls.query();
+            });
+         };
+
+         $scope.addChoice = function() {
+            var newItemNo = $scope.singlePoll.options.length;
+            $scope.singlePoll.options.push({'id': newItemNo, 'votes': 0});
+         };
+
+         $scope.delChoice = function(index) {
+            if ($scope.singlePoll.options.length > 2) {
+               $scope.singlePoll.options.splice(index, 1);
+            }
+         };
 
          $scope.addVote = function(pollid, optionid) {
             var Vote = $resource('/api/polls/vote/'+pollid+'/'+optionid);

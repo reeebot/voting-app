@@ -5,12 +5,33 @@
   display: none !important;
 }
 
-.ng-invalid {
-	border-color: #ff6600;
+input.ng-invalid {
+	border-left: 5px solid #ff6600;
 }
-.ng-valid {
-	border-color: #00cc66;
+input.ng-valid {
+	border-left: 5px solid #00cc66;
 }
-.ng-pristine {
-	border-color: #99ccff;
+input.ng-pristine {
+	border-left: 5px solid #99ccff;
+}
+
+
+/*Show red border if kept the input empty after touching*/
+input.ng-touched.ng-invalid-required {
+    border-left: 5px solid #ff6600;
+}
+/* Show red border when stuff has been typed in, but its invalid */
+input.ng-dirty.ng-invalid {
+  border-left: 5px solid #ff6600;
+}
+/*Show normal border color when typed in for the first time*/
+input.ng-untouched.ng-invalid {
+    border-left: 5px solid #99ccff;
+}
+.ng-submitted input.ng-invalid{
+    border-color: #ff6600;
+}
+form {
+	margin: auto;
+	width: 70%;
 }

@@ -51,6 +51,25 @@ function ClickHandler () {
 		});
 	};
 
+	this.editPoll = function (req, res) {
+		var form = req.body
+		Polls
+			.findOneAndUpdate({
+				'_id': ObjectId(req.params.id)},
+				{
+					'name': form.question,
+					'by': req.user.github.username,
+					'options': form.options
+				})
+			.exec(function (err, result) {
+					if (err) { throw err; }
+					res.json(result);
+				}
+			);
+
+
+	};
+
 	this.deletePoll = function (req, res) {
 		Polls
 			.findOneAndRemove({ '_id': ObjectId(req.params.id), 'by': req.user.github.username })

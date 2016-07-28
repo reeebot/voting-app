@@ -1,26 +1,26 @@
 <div ng-include="'/public/menu.html'"></div>
 
 <div class="jumbotron">
-  <h1><i class="fa fa-plus fa-lg" aria-hidden="true"></i></h1>
-  <p class="lead">create new poll</p>
+  <h1>{{singlePoll.name}}</h1>
+  <p class="lead">edit poll</p>
   <img src="/public/img/logo.png" alt="logo">
 </div>
 
 <div ng-cloak>
-  <form name="newpoll" novalidate>
+  <form name="editpoll" novalidate>
       <div class="form-group has-feedback">
-        <input name="pollq" type="text" class="form-control input-lg" placeholder="question" ng-model="form.pollq" required />
+        <input name="pollq" type="text" class="form-control input-lg" placeholder="question" ng-model="singlePoll.name" required />
         <span class="glyphicon glyphicon-warning-sign form-control-feedback" ng-show="newpoll.pollq.$invalid && newpoll.pollq.$touched">
       </span></div><p></p>
-      <p class="input-group" ng-repeat="option in options track by $index">
+      <p class="input-group" ng-repeat="x in singlePoll.options track by $index">
         <span class="input-group-btn">
-          <input type="text" class="form-control" placeholder="option" ng-model="option.name" required />
+          <input type="text" class="form-control" placeholder="option" ng-model="x.name" required />
           <button type="submit" class="btn btn-danger" ng-show="$last" ng-click="delChoice($index)"><i class="fa fa-minus"></i></button>
           <button type="submit" class="btn btn-primary" ng-show="$last" ng-click="addChoice()"><i class="fa fa-plus"></i></button>
         </span>
       </p>
     <p align="right">
-      <button type="submit" class="btn btn-primary" ng-click="newpoll.$valid && newPoll()">create</button>
+      <button type="submit" class="btn btn-primary" ng-click="editpoll.$valid && editPoll(singlePoll._id)">edit</button>
     </p>
   </form>
 </div>

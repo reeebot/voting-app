@@ -11,7 +11,7 @@
 <div class="container" ng-controller="pollController">
   <ul class="nav nav-tabs nav-stacked col-md-12 col-lg-12 col-sm-12" ng-repeat="poll in userPolls">
     <li>
-    	<a href="#" uib-tooltip="created by: {{poll.by | lowercase}}"><h4><button type="submit" class="btn-xs btn-danger" ng-click="delPol(poll._id)"><i class="fa fa-minus fa-lg" aria-hidden="true"></i></button> {{poll.name}}</h4></a>
+    	<a ng-href="/poll/{{poll._id}}/edit" uib-tooltip="created by: {{poll.by | lowercase}}"><h4><button type="submit" class="btn-xs btn-danger" ng-click="delPoll(poll._id)"><i class="fa fa-minus fa-lg" aria-hidden="true"></i></button> {{poll.name}}</h4></a>
     </li>
     <li ng-repeat="x in poll.options"><h5>{{x.name}}</h5>
       <div class="progress" style="width:50%">

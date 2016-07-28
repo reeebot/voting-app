@@ -8,6 +8,5 @@
 <div>
   <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-6 col-sm-2" ng-repeat="poll in polls" ng-cloak>
     <li><a href ng-href="/poll/{{poll._id}}" uib-tooltip="created by: {{poll.by | lowercase}}"><h4>{{poll.name}}</h4></a></li>
-
   </ul>
 </div>
